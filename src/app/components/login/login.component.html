@@ -1,1 +1,43 @@
-<p>login works!</p>
+<!-- Login Form -->
+<div class="container">
+    <div class="row justify-content-center mt-3">
+        <div class="col-lg-4 col-md-8 col-sm-8">
+            <div class="card shadow">
+                <div class="card-title text-center border-bottom" >
+                    <fa-icon [icon]="faLock" class="fa-2x mb-0"></fa-icon>
+                    <h2 class="p-1 mt-0">Login</h2>
+                </div>
+                <div class="card-body mx-3">
+                    <form [formGroup]="loginForm" (ngSubmit)="formSubmit()" novalidate>
+                        <div class="mb3">
+                            <label for="userId" class="form-label">Please Enter UserId</label>
+                            <input type="text" id="userId" formControlName="userId" class="form-control" [ngClass]="{ 'is-invalid': (f['userId'].dirty || f['userId'].touched) && f['userId'].errors}" placeholder="User Id" required autofocus autocomplete="off">
+                              <div *ngIf="f['userId'].errors?.['required']" class="mt-1 invalid-feedback">
+                                <small> Please Enter a UserIdId.</small>                    
+                              </div>
+                              <div *ngIf="f['userId'].hasError('maxlength')" class="mt-1 invalid-feedback">
+                                <small> UserId should not be more than 50 char.</small>                    
+                              </div>
+                        </div>
+                        <div class="mb4 mt-3">
+                            <label for="password" class="form-label">Please Enter Password</label>
+                            <input type="text" id="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': (f['password'].dirty || f['password'].touched) && f['password'].errors}" placeholder="******" required autocomplete="off">
+                            <div *ngIf="f['password'].hasError('required')" class="mt-1 invalid-feedback">
+                                <small> Please Enter a password.</small>                    
+                              </div>
+                        </div>
+                        <div class="md-4 mt-1">
+                            <input type="checkbox" class="form-check-input" id="Remember">
+                            <label for="Remember" class="form-label">Remember Me</label>
+                        </div>
+                        <div class="d-grid">
+                            <button class="w-100 btn btn-lg btn-primary" [disabled]="f['userId'].hasError('required') || f['userId'].hasError('maxlength') || f['password'].hasError('required')" type="submit">Sign in</button>
+                        </div>
+                    </form>
+                </div>
+                <p class="text-muted text-center">&copy; 2017–2021</p>
+            </div>
+
+        </div>
+    </div>
+</div>
