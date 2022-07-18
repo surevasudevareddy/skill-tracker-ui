@@ -1,1 +1,140 @@
-<p>user-home works!</p>
+<app-header></app-header>
+<!-- Login Form -->
+<section style="background-color: #eee;">
+    <div class="container py-3 mt-5">
+        <div class="row ">
+            <div class="col-md-3 ">
+                <div class="card mb-4 shadow">
+                    <div class="card-body text-center">
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                            alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                        <h5 class="my-3">User Profile</h5>
+                        <p class="text-muted mb-1">Full Stack Developer</p>
+                        <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
+                        <div class="d-flex justify-content-center mb-2">
+                            <button type="button" class="btn btn-primary">Follow</button>
+                            <button type="button" class="btn btn-outline-primary ms-1">Message</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 ">
+                <div class="card mb-0 shadow">
+                    <div class="card-header">Enter Profile Details</div>
+                    <div class="card-body">                        
+                        <form [formGroup]="userForm" (ngSubmit)='onSubmit()' class="row gx-1 align-items-start" novalidate>
+                            <div class="col-md-6">
+                                <label for="name" class="col-form-label">Name:</label>                                
+                                <input type="text" id="name" formControlName="name"  minlength="5" class="form-control mb-0" [ngClass]="{ 'is-invalid': (f['name'].dirty || f['name'].touched) && f['name'].errors}" placeholder="Name" required autofocus autocomplete="off">
+                                <!-- <div *ngIf="formSubmitted && f['name'].errors" class="text-danger"> -->
+                                    <div *ngIf="f['name'].hasError('required')" class="invalid-feedback">
+                                        <small class="text-start">Pleaes enter Name </small>
+                                    </div>
+                                    <div *ngIf="f['name']?.hasError('minlength')" class="invalid-feedback">
+                                        <small> Name should be minimum 5 charectors</small>                    
+                                      </div>
+                                    <div *ngIf="f['name']?.errors?.['maxlength']" class="invalid-feedback">
+                                        <small class="text-start">Name should not be more than 30 char. </small>
+                                    </div>
+                                    
+                                <!-- </div> -->
+                              </div>
+                              
+                              <div class="col-md-6">
+                                <label for="associateId" class="col-form-label">AssociateId:</label>
+                                <input type="text" formControlName="associateId" [ngClass]="{'is-invalid':(f['associateId'].dirty || f['associateId'].touched) && f['associateId'].errors}" class="form-control mb-0" id="associateId" />
+                                <div *ngIf="f['associateId'].errors?.['required']" class="invalid-feedback">
+                                    <small> Please Enter AssociateId as format# CTSXXXXXX.</small>                    
+                                  </div>
+                                  <div *ngIf="f['associateId'].hasError('minlength')" class="invalid-feedback">
+                                    <small> AssociateId should be minimum 5 char.</small>                    
+                                  </div>
+                                  <div *ngIf="f['associateId'].hasError('maxlength')" class="invalid-feedback">
+                                    <small> AssociateId should not be more than 30 char.</small>                    
+                                  </div>
+                                  <div *ngIf="f['associateId'].hasError('pattern')" class="invalid-feedback">
+                                    <small> AssociateId should start with CTS.</small>                    
+                                  </div>
+                              </div>
+                              <div class="col-md-6">
+                                <label for="email" class="col-form-label">Email:</label>
+                                <input type="email" formControlName='email' [ngClass]="{'is-invalid':(f['email'].dirty || f['email'].touched) &&  f['email'].errors}" class="form-control mb-0" />
+                                    <div *ngIf="f['email'].hasError('required')" class="invalid-feedback">
+                                        <small> Email is required.</small>                    
+                                  </div>
+                                  <div *ngIf="f['email'].hasError('email')" class="invalid-feedback">
+                                    <small>Please provide valid Email.</small>                    
+                                  </div>
+                              </div>
+                              <div class="col-md-6">
+                                <label for="mobile" class="col-form-label">Mobile:</label>
+                                <input type="tel" formControlName='mobile' class="form-control mb-0" [ngClass]="{'is-invalid':(f['mobile'].dirty || f['mobile'].touched) && f['mobile'].errors}" id="mobile" />
+                                <div *ngIf="f['mobile'].hasError('required')" class="invalid-feedback">
+                                    <small> Mobile number is required.</small>                    
+                              </div>
+                              <div *ngIf="f['mobile'].hasError('pattern')" class="invalid-feedback">
+                                <small> Please match the Mobile number format[9999999999].</small>                    
+                            </div>
+                              </div>
+                              <!-- This is for Skills -->
+                              <div class="col-md-6 align-items-start"> 
+                                <label for="phone" class="col-form-label">Technical Skill Expertise Level<span class="fw-light">(between 0 and 20)</span>:</label>                               
+                                <div class="card mb-4 shadow">
+                                    <!-- <div class="card-header">Technical Skill Expertise Level</div> -->
+                                    <div class="card-body">  
+                                        <!-- <h5 class="card-title">Technical Skill Expertise Level</h5>                                      -->
+                                        <div class="col-md">
+                                            <label for="htmlCssJs" class="form-label">HTML-CSS-JAVASCRIPT</label>
+                                            <input type="range" formControlName='htmlCssJs' class="form-range" min="0" max="20" step="1" value="0" id="htmlCssJs">
+                                        </div>
+                                        <label for="angular" class="form-label">ANGULAR</label>
+                                        <input type="range" formControlName='angular' [ngClass]="{'is-invalid':  f['angular'].errors}" class="form-range" min="0" max="20" step="1" value="0" id="angular">
+                                        <label for="react" class="form-label">REACT</label>
+                                        <input type="range" formControlName='react' [ngClass]="{'is-invalid':  f['react'].errors}" class="form-range" min="0" max="20" step="1" value="0" id="react">
+                                        <label for="spring" class="form-label">SPRING</label>
+                                        <input type="range" formControlName='spring' [ngClass]="{'is-invalid': f['spring'].errors}" class="form-range" min="0" max="20" step="1" value="0" id="spring">
+                                        <label for="restfull" class="form-label">RESTFUL</label>
+                                        <input type="range" formControlName='restfull' [ngClass]="{'is-invalid':f['restfull'].errors}" class="form-range" min="0" max="20" step="1" value="0" id="restfull">
+                                        <label for="hibernate" class="form-label">HIBERNATE</label>
+                                        <input type="range" formControlName='hibernate' [ngClass]="{'is-invalid': f['hibernate'].errors}" class="form-range" min="0" max="20" step="1" value="0" id="hibernate">
+                                        <label for="git" class="form-label">GIT</label>
+                                        <input type="range" formControlName='git' [ngClass]="{'is-invalid': f['git'].errors}" class="form-range" min="0" max="20" step="1" value="0" id="git">
+                                        <label for="docker" class="form-label">DOCKER</label>
+                                        <input type="range" formControlName='docker' [ngClass]="{'is-invalid':f['docker'].errors}" class="form-range" min="0" max="20" step="1" value="0" id="docker">
+                                        <label for="jenkins" class="form-label">JENKINS</label>
+                                        <input type="range" formControlName='jenkins' [ngClass]="{'is-invalid': f['jenkins'].errors}" class="form-range" min="0" max="20" step="1" value="0" id="jenkins">
+                                        <label for="aws" class="form-label">AWS</label>
+                                        <input type="range" formControlName='aws' [ngClass]="{'is-invalid':f['aws'].errors}" class="form-range" min="0" max="20" step="1" value="0" id="aws">
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <label for="phone" class="col-form-label">Non Technical Skill Expertise Level <span class="fw-light">(between 0 and 20)</span>:</label>
+                                <div class="card mb-4 shadow ">
+                                    <!-- <div class="card-header">Non Technical Skill Expertise Level</div> -->
+                                    <div class="card-body text-center">
+                                        <!-- <h5 class="card-title">Non Technical Skill Expertise Level</h5>                                      -->
+                                        <label for="spoken" class="form-label">SPOKEN</label>
+                                        <input type="range" formControlName='spoken' [ngClass]="{'is-invalid': f['spoken'].errors}" class="form-range" min="0" max="20" step="1" value="0" id="spoken">
+                                        <label for="communication" class="form-label">COMMUNICATION</label>
+                                        <input type="range" formControlName='communication' [ngClass]="{'is-invalid': f['communication'].errors}" class="form-range" min="0" max="20" step="1" value="0" id="communication">
+                                        <label for="aptitude" class="form-label">APTITUDE</label>
+                                        <input type="range" formControlName='aptitude' [ngClass]="{'is-invalid': f['aptitude'].errors}" class="form-range" min="0" max="20" step="1" value="0" id="aptitude">
+                                                                           
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="col-md-12 ">
+                                  <button type="submit" class="btn btn-primary" [disabled]="this.userForm.invalid">Submit</button>
+                                  <button type="reset" class="btn btn-outline-primary ms-2">Reset</button>
+                                </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<app-footer></app-footer>
