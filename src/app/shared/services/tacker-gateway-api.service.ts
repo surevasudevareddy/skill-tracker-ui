@@ -32,5 +32,6 @@ export class TackerGatewayApiService {
     console.log(userProfile);
     return this.httpClient.post(url+'/update-profile',userProfile)
   }
+  
 
 }

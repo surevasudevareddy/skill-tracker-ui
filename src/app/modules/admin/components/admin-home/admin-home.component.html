@@ -1,1 +1,79 @@
-<p>admin-home works!</p>
+<app-header></app-header>
+<section style="background-color: #eee;">
+    <div class="container pt-4 mt-5">
+        <div class="card shadow mb-2">
+            <div class="card-header">Search Panel</div>
+            <div class="card-body">
+                <form [formGroup]="searchForm" (ngSubmit)='onSubmit()' class="row gx-1 align-items-start" novalidate>                
+                    <div class="col-md-3">
+                        <label for="name" class="col-form-label">Name:</label>                                
+                        <input type="text" id="name" formControlName="name" class="form-control mb-0" placeholder="Name" autofocus autocomplete="off">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="associateId" class="col-form-label">AssociateId:</label>                                
+                        <input type="text" id="associateId" formControlName="associateId" [ngClass]="{'is-invalid':(f['associateId'].dirty || f['associateId'].touched) && f['associateId'].errors}" class="form-control mb-0" placeholder="AssociateId" autofocus autocomplete="off">
+                        <div *ngIf="f['associateId'].hasError('pattern')" class="invalid-feedback">
+                            <small> AssociateId should start with CTS.</small>                    
+                          </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="Skill" class="col-form-label">Skill Name:</label>                                
+                        <input type="text" id="skill" formControlName="skill" class="form-control mb-0" placeholder="Slill Name" autofocus autocomplete="off">
+                    </div>
+                    <div class="col-md-3 align-self-end ps-1">                         
+                        <button type="submit" id='submitd' class="btn btn-primary" [disabled]="this.searchForm.invalid">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="card shadow">
+            <div class="card-header">Result Panel</div>
+            <div class="card-body">
+               <div class="row" *ngFor="let item of this.userProfiles">
+                   <div class="col-md-4">
+                       <div class="card shadow">
+                           <div class="card-body">
+                            <div class="border row">
+                               <div class="col">Name: </div><div class="col text-center"><span class="text-end">{{item.name}}</span></div>
+                               </div>
+                               <div class="border row">
+                               <div class="col">AssociateId: </div><div class="col text-center"> <span class="text-center">{{item.associateId}}</span></div>
+                            </div>
+                            <div class="border row">
+                               <div class="col">Mobile: </div><div class="col text-center"> <span>{{item.mobile}}</span></div>
+                            </div>
+                            <div class="border row">
+                                <div class="col">Email: </div><div class="col text-center"> <span>{{item.email}}</span></div>
+                            </div>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="col-md-4">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <div *ngFor="let sk of item.skill">
+                                <div class="border row" *ngIf="sk.skillType ==='Y'">
+                                    <div class="col">{{sk.skillName|uppercase}}:</div>
+                                    <div class="col text-end"><span>{{sk.expertiseLevel}}</span></div>
+                                </div>
+                            </div>                            
+                        </div>
+                    </div>
+                   </div>
+                   <div class="col-md-4">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <div *ngFor="let sk of item.skill">
+                                <div class="border row" *ngIf="sk.skillType ==='N'">
+                                    <div class="col">{{sk.skillName|uppercase}}:</div>
+                                    <div class="col text-end"><span>{{sk.expertiseLevel}}</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   </div>
+               </div>
+            </div>
+        </div>
+    </div>
+</section>
