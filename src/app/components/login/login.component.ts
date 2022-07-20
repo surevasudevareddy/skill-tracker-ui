@@ -22,8 +22,12 @@ export class LoginComponent implements OnInit {
   formSubmit(): void{
     console.log(this.loginForm.value)
     //TODO- call service wiht user deaitls and navigate to appropriate screen, like user, admin or login error
-    if(this.authService.login(this.f))
-    this.router.navigate(['/user']);
+    this.authService.login(this.loginForm.value).subscribe({
+      next:(user)=>{
+        console.log(user)
+        this.router.navigate(['/user',this.f['userId'].value]);
+      }
+    })
   }
   get f(){ return this.loginForm.controls;}
 }

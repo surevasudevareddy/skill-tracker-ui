@@ -8,7 +8,7 @@ const routes: Routes = [
   {path:"login",component:LoginComponent},
   {path:"",redirectTo:"login",pathMatch:"full"},
   {path:"admin",canActivate:[AdminAuthGuard], loadChildren: ()=>import('./modules/admin/admin.module').then((a)=>a.AdminModule)},
-  {path:'user',canActivate:[UserAuthGuard], loadChildren: ()=>import('./modules/user/user.module').then((u)=>u.UserModule)},
+  {path:'user/:userId',canActivate:[UserAuthGuard], loadChildren: ()=>import('./modules/user/user.module').then((u)=>u.UserModule)},
   {path:'**',component:LoginComponent,pathMatch:'full'}
 
 ];

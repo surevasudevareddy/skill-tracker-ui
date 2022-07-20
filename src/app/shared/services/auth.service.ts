@@ -8,10 +8,11 @@ import { Observable, of, throwError } from 'rxjs';
 export class AuthService {
 
   constructor(private router: Router) { }
-  login({userid,password}: any): Observable<any>{
+  login({'userId':userid,'password':password}: any): Observable<any>{
+    console.log(userid)
     if(userid != null && password != null){
       localStorage.setItem('pass',password);
-      return of({"name": "ABC","emil":"abc@a.com"});
+      return of({"name": userid,"password":password});
     }
     return throwError(new Error("faild login"));
   }

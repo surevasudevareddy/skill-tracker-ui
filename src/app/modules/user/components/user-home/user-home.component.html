@@ -20,9 +20,12 @@
             </div>
             <div class="col-md-9 ">
                 <div class="card mb-0 shadow">
-                    <div class="card-header">Enter Profile Details</div>
+                    <div class="card-header">User Profile Details</div>
                     <div class="card-body">                        
                         <form [formGroup]="userForm" (ngSubmit)='onSubmit()' class="row gx-1 align-items-start" novalidate>
+                           
+                            <fieldset class="row gx-1 align-items-start" [disabled]="disableUser">
+                            
                             <div class="col-md-6">
                                 <label for="name" class="col-form-label">Name:</label>                                
                                 <input type="text" id="name" formControlName="name"  minlength="5" class="form-control mb-0" [ngClass]="{ 'is-invalid': (f['name'].dirty || f['name'].touched) && f['name'].errors}" placeholder="Name" required autofocus autocomplete="off">
@@ -76,13 +79,15 @@
                                 <small> Please match the Mobile number format[9999999999].</small>                    
                             </div>
                               </div>
+                            </fieldset>
+                            <fieldset class="row gx-1 align-items-start" [disabled]="disableSkill">
                               <!-- This is for Skills -->
                               <div class="col-md-6 align-items-start"> 
                                 <label for="phone" class="col-form-label">Technical Skill Expertise Level<span class="fw-light">(between 0 and 20)</span>:</label>                               
                                 <div class="card mb-4 shadow">
                                     <!-- <div class="card-header">Technical Skill Expertise Level</div> -->
                                     <div class="card-body">  
-                                        <!-- <h5 class="card-title">Technical Skill Expertise Level</h5>                                      -->
+                                        <!-- <h5 class="card-title">Technical Skill Expertise Level</h5>   -->                                        
                                         <div class="col-md">
                                             <label for="htmlCssJs" class="form-label">HTML-CSS-JAVASCRIPT</label>
                                             <input type="range" formControlName='htmlCssJs' class="form-range" min="0" max="20" step="1" value="0" id="htmlCssJs">
@@ -125,9 +130,11 @@
                                 </div>
                               </div>
                               <div class="col-md-12 ">
-                                  <button type="submit" class="btn btn-primary" [disabled]="this.userForm.invalid">Submit</button>
+                                  <button type="submit" *ngIf="!f['id'].value" class="btn btn-primary" [disabled]="this.userForm.invalid">Submit</button>
+                                  <button type="button" *ngIf="f['id'].value" class="btn btn-primary" [disabled]="this.userForm.invalid" (click)="onUpdate()">Update</button>
                                   <button type="reset" class="btn btn-outline-primary ms-2">Reset</button>
                                 </div>
+                            </fieldset>
                         </form>
 
                     </div>
