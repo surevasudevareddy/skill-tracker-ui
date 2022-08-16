@@ -18,16 +18,18 @@ export class AdminHomeComponent implements OnInit {
     this.searchForm = this.formBuilder.group({
       name: [''],
       associateId: ['', Validators.pattern('^CTS+[a-zA-Z]*')],
-      skill: ['']
+      skillName: ['']
     })
   }
 
   onSubmit() {
-    console.log(this.f['name'].value)
-    this.trackerApi.getUserProfile(this.f['name'].value).subscribe({
+    
+    //this.userProfiles=[];
+    this.trackerApi.getUserProfiles(this.searchForm.value).subscribe({
       next: (v)=>{
-        this.userProfiles.push(v);  
-        console.log(v)    
+        this.userProfiles=v;         
+        console.log("response")
+        console.log(this.userProfiles)
       },
       error: (err)=> console.log(err)
     })

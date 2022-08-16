@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_URL:'http://localhost:8085/skill-tracker/api/v1/engineer'
+  API_URL:'http://localhost:8085/skill-tracker/api/v1'
 };
 
 /*

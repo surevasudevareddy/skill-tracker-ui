@@ -17,8 +17,8 @@
                           </div>
                     </div>
                     <div class="col-md-3">
-                        <label for="Skill" class="col-form-label">Skill Name:</label>                                
-                        <input type="text" id="skill" formControlName="skill" class="form-control mb-0" placeholder="Slill Name" autofocus autocomplete="off">
+                        <label for="skillName" class="col-form-label">Skill Name:</label>                                
+                        <input type="text" id="skillName" formControlName="skillName" class="form-control mb-0" placeholder="Slill Name" autofocus autocomplete="off">
                     </div>
                     <div class="col-md-3 align-self-end ps-1">                         
                         <button type="submit" id='submitd' class="btn btn-primary" [disabled]="this.searchForm.invalid">Search</button>
@@ -28,7 +28,7 @@
         </div>
         <div class="card shadow">
             <div class="card-header">Result Panel</div>
-            <div class="card-body">
+            <div class="card-body">{{this.userProfiles}}
                <div class="row" *ngFor="let item of this.userProfiles">
                    <div class="col-md-4">
                        <div class="card shadow">

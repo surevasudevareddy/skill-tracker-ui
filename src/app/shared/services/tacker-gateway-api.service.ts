@@ -20,17 +20,22 @@ export class TackerGatewayApiService {
   constructor(private httpClient:HttpClient) { }
   public addUserProfile(userProfile:UserProfile):Observable<any>{
     console.log(userProfile)
-    return this.httpClient.post(url+'/add-profile',userProfile);
+    return this.httpClient.post(url+'/engineer/add-profile',userProfile);
   }
 
   public getUserProfile(name:any):Observable<any>{
     console.log(name)
-    return this.httpClient.get(url+'/userAndSkillsByUserName/'+name);
+    return this.httpClient.get(url+'/engineer/userAndSkillsByUserName/'+name);
+  }
+
+  public getUserProfiles(criteriaValue:any):Observable<any>{
+    console.log(criteriaValue)
+    return this.httpClient.post(url+'/admin/criteria',criteriaValue);
   }
 
   public updateUserProfile(userProfile:any):Observable<any>{
     console.log(userProfile);
-    return this.httpClient.post(url+'/update-profile',userProfile)
+    return this.httpClient.post(url+'/engineer/update-profile',userProfile)
   }
   
 
