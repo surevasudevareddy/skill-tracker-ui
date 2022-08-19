@@ -27,8 +27,8 @@
             </div>
         </div>
         <div class="card shadow">
-            <div class="card-header">Result Panel</div>
-            <div class="card-body">{{this.userProfiles}}
+            <div class="card-header">Search Result</div>
+            <div class="card-body"><div *ngIf="this.result" >No Data Found</div>
                <div class="row" *ngFor="let item of this.userProfiles">
                    <div class="col-md-4">
                        <div class="card shadow">

@@ -48,7 +48,7 @@
                               
                               <div class="col-md-6">
                                 <label for="associateId" class="col-form-label">AssociateId:</label>
-                                <input type="text" formControlName="associateId" [ngClass]="{'is-invalid':(f['associateId'].dirty || f['associateId'].touched) && f['associateId'].errors}" class="form-control mb-0" id="associateId" />
+                                <input type="text" formControlName="associateId" [ngClass]="{'is-invalid':(f['associateId'].dirty || f['associateId'].touched) && f['associateId'].errors}" class="form-control mb-0" id="associateId" readonly/>
                                 <div *ngIf="f['associateId'].errors?.['required']" class="invalid-feedback">
                                     <small> Please Enter AssociateId as format# CTSXXXXXX.</small>                    
                                   </div>

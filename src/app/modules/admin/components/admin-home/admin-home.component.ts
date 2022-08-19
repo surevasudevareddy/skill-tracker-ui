@@ -9,7 +9,7 @@ import { TackerGatewayApiService } from 'src/app/shared/services/tacker-gateway-
   styleUrls: ['./admin-home.component.scss']
 })
 export class AdminHomeComponent implements OnInit {
-
+  result= false;
   searchForm!: FormGroup
   userProfiles: UserProfile[]=[]
   constructor(private formBuilder: FormBuilder,private trackerApi:TackerGatewayApiService) { }
@@ -30,6 +30,9 @@ export class AdminHomeComponent implements OnInit {
         this.userProfiles=v;         
         console.log("response")
         console.log(this.userProfiles)
+        if(this.userProfiles.length == 0){
+          this.result= true;
+        }
       },
       error: (err)=> console.log(err)
     })

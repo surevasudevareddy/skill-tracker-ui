@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Skill, UserProfile } from 'src/app/shared/model/user-profile';
+import { AuthStorageService } from 'src/app/shared/services/auth-storage.service';
 import { TackerGatewayApiService } from 'src/app/shared/services/tacker-gateway-api.service';
 
 @Component({
@@ -15,12 +16,12 @@ export class UserHomeComponent implements OnInit {
   disableSkill= ''
   userProfile!:UserProfile;
   success=false;
-  constructor(private formBuilder:FormBuilder,private trackerAPI:TackerGatewayApiService,private router:ActivatedRoute) { }
+  constructor(private formBuilder:FormBuilder,private trackerAPI:TackerGatewayApiService,private router:ActivatedRoute,private authStorage:AuthStorageService) { }
 
   ngOnInit(): void {
     this.userForm = this.formBuilder.group({
       name:['',[Validators.required,Validators.minLength(5),Validators.maxLength(30)]],
-      associateId:['',[Validators.required,Validators.minLength(5),Validators.maxLength(30),Validators.pattern('^CTS+[a-zA-Z]*')]],
+      associateId:['',[Validators.required,Validators.minLength(5),Validators.maxLength(30),Validators.pattern('^CTS+[a-zA-Z0-9]*')]],
       email:['',[Validators.required,Validators.email]],
       mobile:['',[Validators.required,Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]],
       htmlCssJs:[0],
@@ -57,19 +58,34 @@ export class UserHomeComponent implements OnInit {
     //load profile detwials by using the name, and show them in the UI, if not available then just show empty form fillable.
     //if data is available then disable full form except skill section if last edit date is grater or equals to 10 days
     this.trackerAPI.getUserProfile(parm.get('userId')).subscribe({
-      next: (v) => {
-        console.log(v)
+      next: (response) => {
+        console.log(response)
         this.disableUser= 'disabled';
         this.disableSkill= 'disabled';
         this.userProfile = new UserProfile(); 
-        Object.assign(this.userProfile, v);
+        if(response){
+        Object.assign(this.userProfile, response);
         console.log('days difference:' + this.getDifferenceInDays(new Date(),new Date(this.userProfile.updateTs)))
         if(this.getDifferenceInDays(new Date(),new Date(this.userProfile.updateTs)) >=10){
           this.disableSkill = '';
         }
-        this.consumeResponse(v);
+        this.consumeResponse(response);
+      }else{
+        let user = this.authStorage.getUser()
+        this.f['name'].setValue(user.userName);
+        this.f['associateId'].setValue('CTS'+user.userInfoId);
+        this.f['email'].setValue(user.emailId);
+      }
       },
-      error: (e) => console.log(e),
+      error: (e) =>{ 
+        console.log(e)     
+        //no valid records found so prepopulate user detials in the form
+        let user = this.authStorage.getUser()
+        console.log(user)
+        this.f['name'].setValue(user.username);
+        this.f['associateId'].setValue('CTS'+user.id);
+        this.f['email'].setValue(user.email);
+      },
       complete: () => console.log('#####completed init')
       
     })

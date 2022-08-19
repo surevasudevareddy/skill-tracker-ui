@@ -16,7 +16,7 @@
                             <label for="userId" class="form-label">Please Enter UserId</label>
                             <input type="text" id="userId" formControlName="userId" class="form-control" [ngClass]="{ 'is-invalid': (f['userId'].dirty || f['userId'].touched) && f['userId'].errors}" placeholder="User Id" required autofocus autocomplete="off">
                               <div *ngIf="f['userId'].errors?.['required']" class="mt-1 invalid-feedback">
-                                <small> Please Enter a UserIdId.</small>                    
+                                <small> Please Enter a UserId.</small>                    
                               </div>
                               <div *ngIf="f['userId'].hasError('maxlength')" class="mt-1 invalid-feedback">
                                 <small> UserId should not be more than 50 char.</small>                    
