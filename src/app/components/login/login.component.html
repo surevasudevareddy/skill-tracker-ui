@@ -7,6 +7,9 @@
                     <fa-icon [icon]="faLock" class="fa-2x mb-0"></fa-icon>
                     <h2 class="p-1 mt-0">Login</h2>
                 </div>
+                <div *ngIf="this.loginFailed" class="alert alert-danger" role="alert">
+                    UserName and Password are not correct
+                  </div>
                 <div class="card-body mx-3">
                     <form [formGroup]="loginForm" (ngSubmit)="formSubmit()" novalidate>
                         <div class="mb3">

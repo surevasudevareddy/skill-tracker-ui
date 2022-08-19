@@ -21,6 +21,9 @@
             <div class="col-md-9 ">
                 <div class="card mb-0 shadow">
                     <div class="card-header">User Profile Details</div>
+                    <div *ngIf="this.success" class="alert alert-success" role="alert">
+                        User Profile has been added Successfully!
+                      </div>
                     <div class="card-body">                        
                         <form [formGroup]="userForm" (ngSubmit)='onSubmit()' class="row gx-1 align-items-start" novalidate>
                            
