@@ -24,7 +24,7 @@
                         </div>
                         <div class="mb4 mt-3">
                             <label for="password" class="form-label">Please Enter Password</label>
-                            <input type="text" id="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': (f['password'].dirty || f['password'].touched) && f['password'].errors}" placeholder="******" required autocomplete="off">
+                            <input type="password" id="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': (f['password'].dirty || f['password'].touched) && f['password'].errors}" placeholder="******" required autocomplete="off">
                             <div *ngIf="f['password'].hasError('required')" class="mt-1 invalid-feedback">
                                 <small> Please Enter a password.</small>                    
                               </div>

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TackerGatewayApiService } from './tacker-gateway-api.service';
+import { TrackerGatewayApiService } from './tracker-gateway-api.service';
 
 describe('TackerGatewayApiService', () => {
-  let service: TackerGatewayApiService;
+  let service: TrackerGatewayApiService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(TackerGatewayApiService);
+    service = TestBed.inject(TrackerGatewayApiService);
   });
 
   it('should be created', () => {

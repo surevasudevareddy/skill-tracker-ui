@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserProfile } from 'src/app/shared/model/user-profile';
-import { TackerGatewayApiService } from 'src/app/shared/services/tacker-gateway-api.service';
+import { TrackerGatewayApiService } from 'src/app/shared/services/tracker-gateway-api.service';
 
 @Component({
   selector: 'app-admin-home',
@@ -9,10 +9,11 @@ import { TackerGatewayApiService } from 'src/app/shared/services/tacker-gateway-
   styleUrls: ['./admin-home.component.scss']
 })
 export class AdminHomeComponent implements OnInit {
-  result= false;
+  result = false;
   searchForm!: FormGroup
-  userProfiles: UserProfile[]=[]
-  constructor(private formBuilder: FormBuilder,private trackerApi:TackerGatewayApiService) { }
+  userProfiles: UserProfile[] = []
+  constructor(private formBuilder: FormBuilder,
+    private trackerApi: TrackerGatewayApiService) { }
 
   ngOnInit(): void {
     this.searchForm = this.formBuilder.group({
@@ -23,21 +24,21 @@ export class AdminHomeComponent implements OnInit {
   }
 
   onSubmit() {
-    
+
     //this.userProfiles=[];
     this.trackerApi.getUserProfiles(this.searchForm.value).subscribe({
-      next: (v)=>{
-        this.userProfiles=v;         
+      next: (v) => {
+        this.userProfiles = v;
         console.log("response")
         console.log(this.userProfiles)
-        if(this.userProfiles.length == 0){
-          this.result= true;
+        if (this.userProfiles.length == 0) {
+          this.result = true;
         }
       },
-      error: (err)=> console.log(err)
+      error: (err) => console.log(err)
     })
   }
-  get f(){
+  get f() {
     return this.searchForm.controls;
   }
 }

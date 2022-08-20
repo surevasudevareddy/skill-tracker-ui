@@ -51,8 +51,8 @@
                    <div class="col-md-4">
                     <div class="card shadow">
                         <div class="card-body">
-                            <div *ngFor="let sk of item.skill">
-                                <div class="border row" *ngIf="sk.skillType ==='Y'">
+                            <div *ngFor="let sk of item.profileSkillList">
+                                <div class="border row" *ngIf="sk.skillType ==='Technical'">
                                     <div class="col">{{sk.skillName|uppercase}}:</div>
                                     <div class="col text-end"><span>{{sk.expertiseLevel}}</span></div>
                                 </div>
@@ -63,8 +63,8 @@
                    <div class="col-md-4">
                     <div class="card shadow">
                         <div class="card-body">
-                            <div *ngFor="let sk of item.skill">
-                                <div class="border row" *ngIf="sk.skillType ==='N'">
+                            <div *ngFor="let sk of item.profileSkillList">
+                                <div class="border row" *ngIf="sk.skillType ==='Non-Technical'">
                                     <div class="col">{{sk.skillName|uppercase}}:</div>
                                     <div class="col text-end"><span>{{sk.expertiseLevel}}</span></div>
                                 </div>

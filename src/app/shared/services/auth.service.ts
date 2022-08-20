@@ -4,30 +4,29 @@ import { Router } from '@angular/router';
 import { Observable, of, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { AuthStorageService } from './auth-storage.service';
+import { AUTH_URLS } from './../../constants/api-url.constant';
 
-const url = environment.AUTH_URL;
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private router: Router, private http : HttpClient,private tokenService:AuthStorageService) { }
+  constructor(private router: Router, private http: HttpClient, private tokenService: AuthStorageService) { }
 
-  login(username:string,password:string): Observable<any>{
+  login(username: string, password: string): Observable<any> {
     console.log(username)
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-//        'Origin': 'http://localhost:4200',
         'Authorization': 'Basic ' + btoa(username + ":" + password)
       })
     };
-    return this.http.post(url+'/login', {}, httpOptions);
-   
+    return this.http.post(AUTH_URLS.LOGIN, {}, httpOptions);
+
   }
 
-  logout():void{
+  logout(): void {
     console.log("logout")
     this.tokenService.signOut();
     this.router.navigate(['login']);

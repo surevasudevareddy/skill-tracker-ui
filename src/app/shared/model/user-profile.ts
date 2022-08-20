@@ -6,11 +6,10 @@ export class UserProfile {
     mobile!:number;
     createTs!:Date;
     updateTs!:Date;
-    skill: Skill[] =[]
+    profileSkillList: ProfileSkill[] =[]
 }
-export class Skill{
-    constructor (skillName: string,level: number,type: string){
-       
+export class ProfileSkill{
+    constructor (skillName: string,level: number,type: string){       
        this.skillName = skillName;
        this.expertiseLevel = level;
        this.skillType = type;

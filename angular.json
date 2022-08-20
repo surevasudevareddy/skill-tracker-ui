@@ -75,10 +75,12 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "skill-tracker-ui:build:production"
+              "browserTarget": "skill-tracker-ui:build:production",
+              "proxyConfig": "src/proxy.conf.prd.json"
             },
             "development": {
-              "browserTarget": "skill-tracker-ui:build:development"
+              "browserTarget": "skill-tracker-ui:build:development",
+              "proxyConfig": "src/proxy.conf.local.json"
             }
           },
           "defaultConfiguration": "development"
