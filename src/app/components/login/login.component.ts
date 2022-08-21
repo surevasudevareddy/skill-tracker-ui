@@ -33,13 +33,11 @@ export class LoginComponent implements OnInit {
     }
   }
   formSubmit(): void {
-    console.log(this.loginForm.value)
     //TODO- call service wiht user deaitls and navigate to appropriate screen, like user, admin or login error
     this.authService.login(this.loginForm.value.userId, this.loginForm.value.password).subscribe({
       next: (user) => {
-        console.log(user)
         this.authStorage.saveUser(user)
-        this.authStorage.saveKey(user.accessToken)
+        this.authStorage.saveKey(user.token)
         let role = this.authStorage.getUser().role;
         if (role === "ADMIN") {
           this.router.navigate(['/admin']);

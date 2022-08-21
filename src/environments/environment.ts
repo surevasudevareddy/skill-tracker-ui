@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  API_URL:'http://localhost:8085/skill-tracker/api/v1',
-  AUTH_URL:'http://localhost:9085/auth'
+  API_URL:'http://localhost:9080',
+  //AUTH_URL:'http://localhost:9085/auth'
 };
 
 /*

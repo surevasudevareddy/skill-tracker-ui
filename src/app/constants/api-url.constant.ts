@@ -1,4 +1,6 @@
-const API = '/api';
+import { environment } from "src/environments/environment";
+
+const API = environment.API_URL;
 const AUTH = API + '/auth';
 const SKILL_TRACKER = API + '/skill-tracker';
 const ENGINEER = '/engineer';

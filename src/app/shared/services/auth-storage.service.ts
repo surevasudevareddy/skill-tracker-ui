@@ -11,29 +11,29 @@ export class AuthStorageService {
 
   constructor() { }
 
-  public saveUser(user:any) :void{
+  public saveUser(user: any): void {
     window.sessionStorage.removeItem(USER_KEY)
-    window.sessionStorage.setItem(USER_KEY,JSON.stringify(user))
+    window.sessionStorage.setItem(USER_KEY, JSON.stringify(user))
   }
-  public saveKey(token:string):void{
+  public saveKey(token: string): void {
     window.sessionStorage.removeItem(TOKEN_KEY)
-    window.sessionStorage.setItem(TOKEN_KEY,token)
+    window.sessionStorage.setItem(TOKEN_KEY, token)
   }
-  public getToken():string | null{
+  public getToken(): string | null {
     return window.sessionStorage.getItem(TOKEN_KEY)
   }
-  public getUser():any{
+  public getUser(): any {
     const user = window.sessionStorage.getItem(USER_KEY)
-    if(user){
+    if (user) {
       return JSON.parse(user)
     }
     return {}
   }
-  public signOut():void{
+  public signOut(): void {
     window.sessionStorage.removeItem(USER_KEY);
     window.sessionStorage.removeItem(TOKEN_KEY);
   }
-  isLoggedIn() :boolean{
+  isLoggedIn(): boolean {
     return this.getToken() !== null;
   }
 }

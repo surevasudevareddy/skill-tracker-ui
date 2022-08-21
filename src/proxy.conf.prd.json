@@ -3,7 +3,7 @@
       "pathRewrite": {
         "^/api": ""
       },
-      "target": "http://localhost:9080",
+      "target": "http://ec2-52-14-200-107.us-east-2.compute.amazonaws.com:9080",
       "changeOrigin": true,
       "logLevel": "debug"
     }

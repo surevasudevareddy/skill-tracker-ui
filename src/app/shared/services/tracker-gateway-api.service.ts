@@ -1,11 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserProfile } from '../model/user-profile';
-import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { SKILL_TRACKER_URLS } from './../../constants/api-url.constant';
-
-const url = environment.API_URL;
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
