@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
       next:(user)=>{
         console.log(user)
         this.authStorage.saveUser(user)
-        this.authStorage.saveKey(user.accessToken)
+        this.authStorage.saveKey(user.token)
         let role = this.authStorage.getUser().role;
         if(role === "ADMIN"){
           this.router.navigate(['/admin']);

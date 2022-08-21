@@ -31,6 +31,7 @@ export class AuthStorageService {
   }
   public signOut():void{
     window.sessionStorage.removeItem(USER_KEY)
+    window.sessionStorage.removeItem(TOKEN_KEY)
   }
   isLoggedIn() :boolean{
     return this.getToken() !== null;
