@@ -145,6 +145,9 @@ export class UserHomeComponent implements OnInit {
   //update the skills which are got modified
   onUpdate() {
     this.userProfile.updateTs = new Date();//update data for user and take the modified skills into array to send to service
+    console.log("Uddatre Profile::"+ this.userProfile);
+    console.log("Uddate Profile Name::"+ this.userProfile.name);
+    
     this.userProfile.profileSkillList = this.userProfile.profileSkillList.filter(ProfileSkill => {
       if (this.f[ProfileSkill.skillName].dirty) {
         ProfileSkill.expertiseLevel = Number(this.f[ProfileSkill.skillName].value);
@@ -224,6 +227,7 @@ export class UserHomeComponent implements OnInit {
       }
     });
     console.log(this.userForm.value);
+    this.userProfile = userProfile;
   }
 
 
