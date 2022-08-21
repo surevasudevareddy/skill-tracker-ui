@@ -34,9 +34,8 @@ export class TrackerGatewayApiService {
     return this.httpClient.get(SKILL_TRACKER_URLS.GET_PROFILE + associateId);
   }
 
-  public getUserProfiles(criteria: any, criteriaValue: any): Observable<any> {
-    console.log("Criteria:" + criteria + "Criteria Value:" + criteriaValue)
-    return this.httpClient.get(SKILL_TRACKER_URLS.GET_PROFILES + criteria + "/" + criteriaValue);
+  public getUserProfiles(criteria: any): Observable<any> {
+    return this.httpClient.post(SKILL_TRACKER_URLS.GET_PROFILES, criteria);
   }
 
   public updateUserProfile(userProfile: UserProfile): Observable<any> {
