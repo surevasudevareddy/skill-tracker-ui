@@ -17,6 +17,8 @@ export class UserHomeComponent implements OnInit {
   disableSkill = ''
   userProfile!: UserProfile;
   success = false;
+  update = false;
+
   constructor(private formBuilder: FormBuilder,
     private trackerAPI: TrackerGatewayApiService,
     private router: ActivatedRoute,
@@ -122,12 +124,12 @@ export class UserHomeComponent implements OnInit {
     userProfile.profileSkillList.push(new ProfileSkill('communication', this.f['communication'].value, 'Non-Technical'));
     userProfile.profileSkillList.push(new ProfileSkill('aptitude', this.f['aptitude'].value, 'Non-Technical '));
     this.trackerAPI.addUserProfile(userProfile).subscribe({
-      next: (v) => {
-        console.log(v);
+      next: (response) => {
+        console.log(response);
         //once the form got saved then disable complete form
         this.disableUser = 'disabled';
         this.disableSkill = 'disabled';
-        this.consumeResponse(v);
+        //this.consumeResponse(v);
         this.success = true;
       },
       error: (e) => console.error(e),
@@ -142,7 +144,6 @@ export class UserHomeComponent implements OnInit {
 
   //update the skills which are got modified
   onUpdate() {
-
     this.userProfile.updateTs = new Date();//update data for user and take the modified skills into array to send to service
     this.userProfile.profileSkillList = this.userProfile.profileSkillList.filter(ProfileSkill => {
       if (this.f[ProfileSkill.skillName].dirty) {
@@ -152,8 +153,13 @@ export class UserHomeComponent implements OnInit {
       return undefined;
     })
     this.trackerAPI.updateUserProfile(this.userProfile).subscribe({
-      next: (v) => console.log('updated successfully.'),
-      error: (e) => console.log(e)
+      next: (response) => {
+        console.log('updated successfully.');
+        this.update = true;
+      },
+      error: (e) => {
+        console.log(e)
+      }
     });
     this.disableSkill = 'disabled';//disabled the skill section, so that it will now allow for immidiate update
   }
@@ -165,21 +171,17 @@ export class UserHomeComponent implements OnInit {
   }
 
   consumeResponse(response: any): any {
-    let userProf: UserProfile = new UserProfile();
-    //const res : any = JSON.parse(v);
-    console.log("----------------" + response)
+    let userProfile: UserProfile = new UserProfile();
     let userProfiles: any[] = [];
     Object.assign(userProfiles, response['profileList'])
-    let userProfile: any;
 
     userProfile = userProfiles[0];
-    console.log("------------" + userProfile.name)
-    this.f['id'].setValue(userProf.id);
+    this.f['id'].setValue(userProfile.profileId);
     this.f['name'].setValue(userProfile.name);
     this.f['associateId'].setValue(userProfile.associateId);
     this.f['email'].setValue(userProfile.email);
     this.f['mobile'].setValue(userProfile.mobile);
-    userProf.profileSkillList.forEach(element => {
+    userProfile.profileSkillList.forEach(element => {
       if (element.skillName == "htmlCssJs") {
         this.f['htmlCssJsId'].setValue(element.id);
         this.f['htmlCssJs'].setValue(element.expertiseLevel);

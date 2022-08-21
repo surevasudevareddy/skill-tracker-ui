@@ -33,15 +33,12 @@ export class TrackerGatewayApiService {
     console.log("associated Id:::" +associateId)
     return this.httpClient.get(SKILL_TRACKER_URLS.GET_PROFILE + associateId);
   }
+
   public getUserProfiles(criteriaValue: any): Observable<any> {
-    console.log(criteriaValue)
-    return this.httpClient.post(url + '/admin/criteria', criteriaValue);
+    return this.httpClient.post(SKILL_TRACKER_URLS.GET_PROFILES, criteriaValue);
   }
 
   public updateUserProfile(userProfile: any): Observable<any> {
-    console.log(userProfile);
-    return this.httpClient.post(url + '/engineer/update-profile', userProfile)
+    return this.httpClient.post(SKILL_TRACKER_URLS.UPDATE_PROFILE, userProfile)
   }
-
-
 }

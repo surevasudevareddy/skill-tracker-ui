@@ -1,5 +1,5 @@
 export class UserProfile {
-    id!:number
+    profileId!:number
     name!: string;
     associateId!:string;
     email!:string;

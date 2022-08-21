@@ -17,125 +17,167 @@
                         </div>
                     </div>
                 </div>
-            </div> -->  
+            </div> -->
             <div class="col-md-9 ">
                 <div class="card mb-0 shadow">
                     <div class="card-header">User Profile Details</div>
                     <div *ngIf="this.success" class="alert alert-success" role="alert">
-                        User Profile has been added Successfully!
-                      </div>
-                    <div class="card-body">                        
-                        <form [formGroup]="userForm" (ngSubmit)='onSubmit()' class="row gx-1 align-items-start" novalidate>
-                           
+                        Profile has been added successfully!
+                    </div>
+                    <div *ngIf="this.update" class="alert alert-success" role="alert">
+                        Profile has been updated successfully!
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="userForm" (ngSubmit)='onSubmit()' class="row gx-1 align-items-start"
+                            novalidate>
+
                             <fieldset class="row gx-1 align-items-start" [disabled]="disableUser">
-                            
-                            <div class="col-md-6">
-                                <label for="name" class="col-form-label">Name:</label>                                
-                                <input type="text" id="name" formControlName="name"  minlength="4" class="form-control mb-0" [ngClass]="{ 'is-invalid': (f['name'].dirty || f['name'].touched) && f['name'].errors}" placeholder="Name" required autofocus autocomplete="off">
-                                <!-- <div *ngIf="formSubmitted && f['name'].errors" class="text-danger"> -->
+
+                                <div class="col-md-6">
+                                    <label for="name" class="col-form-label">Name:</label>
+                                    <input type="text" id="name" formControlName="name" minlength="4"
+                                        class="form-control mb-0"
+                                        [ngClass]="{ 'is-invalid': (f['name'].dirty || f['name'].touched) && f['name'].errors}"
+                                        placeholder="Name" required autofocus autocomplete="off">
+                                    <!-- <div *ngIf="formSubmitted && f['name'].errors" class="text-danger"> -->
                                     <div *ngIf="f['name'].hasError('required')" class="invalid-feedback">
                                         <small class="text-start">Pleaes enter Name </small>
                                     </div>
                                     <div *ngIf="f['name']?.hasError('minlength')" class="invalid-feedback">
-                                        <small> Name should be minimum 4 charectors</small>                    
-                                      </div>
+                                        <small> Name should be minimum 4 charectors</small>
+                                    </div>
                                     <div *ngIf="f['name']?.errors?.['maxlength']" class="invalid-feedback">
                                         <small class="text-start">Name should not be more than 30 char. </small>
                                     </div>
-                                    
-                                <!-- </div> -->
-                              </div>
-                              
-                              <div class="col-md-6">
-                                <label for="associateId" class="col-form-label">AssociateId:</label>
-                                <input type="text" formControlName="associateId" [ngClass]="{'is-invalid':(f['associateId'].dirty || f['associateId'].touched) && f['associateId'].errors}" class="form-control mb-0" id="associateId" readonly/>
-                                <div *ngIf="f['associateId'].errors?.['required']" class="invalid-feedback">
-                                    <small> Please Enter AssociateId as format# CTSXXXXXX.</small>                    
-                                  </div>
-                                  <div *ngIf="f['associateId'].hasError('minlength')" class="invalid-feedback">
-                                    <small> AssociateId should be minimum 5 char.</small>                    
-                                  </div>
-                                  <div *ngIf="f['associateId'].hasError('maxlength')" class="invalid-feedback">
-                                    <small> AssociateId should not be more than 30 char.</small>                    
-                                  </div>
-                                  <div *ngIf="f['associateId'].hasError('pattern')" class="invalid-feedback">
-                                    <small> AssociateId should start with CTS.</small>                    
-                                  </div>
-                              </div>
-                              <div class="col-md-6">
-                                <label for="email" class="col-form-label">Email:</label>
-                                <input type="email" formControlName='email' [ngClass]="{'is-invalid':(f['email'].dirty || f['email'].touched) &&  f['email'].errors}" class="form-control mb-0" />
+
+                                    <!-- </div> -->
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="associateId" class="col-form-label">AssociateId:</label>
+                                    <input type="text" formControlName="associateId"
+                                        [ngClass]="{'is-invalid':(f['associateId'].dirty || f['associateId'].touched) && f['associateId'].errors}"
+                                        class="form-control mb-0" id="associateId" readonly />
+                                    <div *ngIf="f['associateId'].errors?.['required']" class="invalid-feedback">
+                                        <small> Please Enter AssociateId as format# CTSXXXXXX.</small>
+                                    </div>
+                                    <div *ngIf="f['associateId'].hasError('minlength')" class="invalid-feedback">
+                                        <small> AssociateId should be minimum 5 char.</small>
+                                    </div>
+                                    <div *ngIf="f['associateId'].hasError('maxlength')" class="invalid-feedback">
+                                        <small> AssociateId should not be more than 30 char.</small>
+                                    </div>
+                                    <div *ngIf="f['associateId'].hasError('pattern')" class="invalid-feedback">
+                                        <small> AssociateId should start with CTS.</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="email" class="col-form-label">Email:</label>
+                                    <input type="email" formControlName='email'
+                                        [ngClass]="{'is-invalid':(f['email'].dirty || f['email'].touched) &&  f['email'].errors}"
+                                        class="form-control mb-0" />
                                     <div *ngIf="f['email'].hasError('required')" class="invalid-feedback">
-                                        <small> Email is required.</small>                    
-                                  </div>
-                                  <div *ngIf="f['email'].hasError('email')" class="invalid-feedback">
-                                    <small>Please provide valid Email.</small>                    
-                                  </div>
-                              </div>
-                              <div class="col-md-6">
-                                <label for="mobile" class="col-form-label">Mobile:</label>
-                                <input type="tel" formControlName='mobile' class="form-control mb-0" [ngClass]="{'is-invalid':(f['mobile'].dirty || f['mobile'].touched) && f['mobile'].errors}" id="mobile" />
-                                <div *ngIf="f['mobile'].hasError('required')" class="invalid-feedback">
-                                    <small> Mobile number is required.</small>                    
-                              </div>
-                              <div *ngIf="f['mobile'].hasError('pattern')" class="invalid-feedback">
-                                <small> Please match the Mobile number format[9999999999].</small>                    
-                            </div>
-                              </div>
+                                        <small> Email is required.</small>
+                                    </div>
+                                    <div *ngIf="f['email'].hasError('email')" class="invalid-feedback">
+                                        <small>Please provide valid Email.</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="mobile" class="col-form-label">Mobile:</label>
+                                    <input type="tel" formControlName='mobile' class="form-control mb-0"
+                                        [ngClass]="{'is-invalid':(f['mobile'].dirty || f['mobile'].touched) && f['mobile'].errors}"
+                                        id="mobile" />
+                                    <div *ngIf="f['mobile'].hasError('required')" class="invalid-feedback">
+                                        <small> Mobile number is required.</small>
+                                    </div>
+                                    <div *ngIf="f['mobile'].hasError('pattern')" class="invalid-feedback">
+                                        <small> Please match the Mobile number format[9999999999].</small>
+                                    </div>
+                                </div>
                             </fieldset>
                             <fieldset class="row gx-1 align-items-start" [disabled]="disableSkill">
-                              <!-- This is for Skills -->
-                              <div class="col-md-6 align-items-start"> 
-                                <label for="phone" class="col-form-label">Technical Skill Expertise Level<span class="fw-light">(between 0 and 20)</span>:</label>                               
-                                <div class="card mb-4 shadow">
-                                    <!-- <div class="card-header">Technical Skill Expertise Level</div> -->
-                                    <div class="card-body">  
-                                        <!-- <h5 class="card-title">Technical Skill Expertise Level</h5>   -->                                        
-                                        <div class="col-md">
-                                            <label for="htmlCssJs" class="form-label">HTML-CSS-JAVASCRIPT</label>
-                                            <input type="range" formControlName='htmlCssJs' class="form-range" min="0" max="20" step="1" value="0" id="htmlCssJs">
+                                <!-- This is for Skills -->
+                                <div class="col-md-6 align-items-start">
+                                    <label for="phone" class="col-form-label">Technical Skill Expertise Level<span
+                                            class="fw-light">(between 0 and 20)</span>:</label>
+                                    <div class="card mb-4 shadow">
+                                        <!-- <div class="card-header">Technical Skill Expertise Level</div> -->
+                                        <div class="card-body">
+                                            <!-- <h5 class="card-title">Technical Skill Expertise Level</h5>   -->
+                                            <div class="col-md">
+                                                <label for="htmlCssJs" class="form-label">HTML-CSS-JAVASCRIPT</label>
+                                                <input type="range" formControlName='htmlCssJs' class="form-range"
+                                                    min="0" max="20" step="1" value="0" id="htmlCssJs">
+                                            </div>
+                                            <label for="angular" class="form-label">ANGULAR</label>
+                                            <input type="range" formControlName='angular'
+                                                [ngClass]="{'is-invalid':  f['angular'].errors}" class="form-range"
+                                                min="0" max="20" step="1" value="0" id="angular">
+                                            <label for="react" class="form-label">REACT</label>
+                                            <input type="range" formControlName='react'
+                                                [ngClass]="{'is-invalid':  f['react'].errors}" class="form-range"
+                                                min="0" max="20" step="1" value="0" id="react">
+                                            <label for="spring" class="form-label">SPRING</label>
+                                            <input type="range" formControlName='spring'
+                                                [ngClass]="{'is-invalid': f['spring'].errors}" class="form-range"
+                                                min="0" max="20" step="1" value="0" id="spring">
+                                            <label for="restfull" class="form-label">RESTFUL</label>
+                                            <input type="range" formControlName='restfull'
+                                                [ngClass]="{'is-invalid':f['restfull'].errors}" class="form-range"
+                                                min="0" max="20" step="1" value="0" id="restfull">
+                                            <label for="hibernate" class="form-label">HIBERNATE</label>
+                                            <input type="range" formControlName='hibernate'
+                                                [ngClass]="{'is-invalid': f['hibernate'].errors}" class="form-range"
+                                                min="0" max="20" step="1" value="0" id="hibernate">
+                                            <label for="git" class="form-label">GIT</label>
+                                            <input type="range" formControlName='git'
+                                                [ngClass]="{'is-invalid': f['git'].errors}" class="form-range" min="0"
+                                                max="20" step="1" value="0" id="git">
+                                            <label for="docker" class="form-label">DOCKER</label>
+                                            <input type="range" formControlName='docker'
+                                                [ngClass]="{'is-invalid':f['docker'].errors}" class="form-range" min="0"
+                                                max="20" step="1" value="0" id="docker">
+                                            <label for="jenkins" class="form-label">JENKINS</label>
+                                            <input type="range" formControlName='jenkins'
+                                                [ngClass]="{'is-invalid': f['jenkins'].errors}" class="form-range"
+                                                min="0" max="20" step="1" value="0" id="jenkins">
+                                            <label for="aws" class="form-label">AWS</label>
+                                            <input type="range" formControlName='aws'
+                                                [ngClass]="{'is-invalid':f['aws'].errors}" class="form-range" min="0"
+                                                max="20" step="1" value="0" id="aws">
                                         </div>
-                                        <label for="angular" class="form-label">ANGULAR</label>
-                                        <input type="range" formControlName='angular' [ngClass]="{'is-invalid':  f['angular'].errors}" class="form-range" min="0" max="20" step="1" value="0" id="angular">
-                                        <label for="react" class="form-label">REACT</label>
-                                        <input type="range" formControlName='react' [ngClass]="{'is-invalid':  f['react'].errors}" class="form-range" min="0" max="20" step="1" value="0" id="react">
-                                        <label for="spring" class="form-label">SPRING</label>
-                                        <input type="range" formControlName='spring' [ngClass]="{'is-invalid': f['spring'].errors}" class="form-range" min="0" max="20" step="1" value="0" id="spring">
-                                        <label for="restfull" class="form-label">RESTFUL</label>
-                                        <input type="range" formControlName='restfull' [ngClass]="{'is-invalid':f['restfull'].errors}" class="form-range" min="0" max="20" step="1" value="0" id="restfull">
-                                        <label for="hibernate" class="form-label">HIBERNATE</label>
-                                        <input type="range" formControlName='hibernate' [ngClass]="{'is-invalid': f['hibernate'].errors}" class="form-range" min="0" max="20" step="1" value="0" id="hibernate">
-                                        <label for="git" class="form-label">GIT</label>
-                                        <input type="range" formControlName='git' [ngClass]="{'is-invalid': f['git'].errors}" class="form-range" min="0" max="20" step="1" value="0" id="git">
-                                        <label for="docker" class="form-label">DOCKER</label>
-                                        <input type="range" formControlName='docker' [ngClass]="{'is-invalid':f['docker'].errors}" class="form-range" min="0" max="20" step="1" value="0" id="docker">
-                                        <label for="jenkins" class="form-label">JENKINS</label>
-                                        <input type="range" formControlName='jenkins' [ngClass]="{'is-invalid': f['jenkins'].errors}" class="form-range" min="0" max="20" step="1" value="0" id="jenkins">
-                                        <label for="aws" class="form-label">AWS</label>
-                                        <input type="range" formControlName='aws' [ngClass]="{'is-invalid':f['aws'].errors}" class="form-range" min="0" max="20" step="1" value="0" id="aws">
                                     </div>
-                                </div>
                                 </div>
                                 <div class="col-md-6 ">
-                                    <label for="phone" class="col-form-label">Non Technical Skill Expertise Level <span class="fw-light">(between 0 and 20)</span>:</label>
-                                <div class="card mb-4 shadow ">
-                                    <!-- <div class="card-header">Non Technical Skill Expertise Level</div> -->
-                                    <div class="card-body text-center">
-                                        <!-- <h5 class="card-title">Non Technical Skill Expertise Level</h5>                                      -->
-                                        <label for="spoken" class="form-label">SPOKEN</label>
-                                        <input type="range" formControlName='spoken' [ngClass]="{'is-invalid': f['spoken'].errors}" class="form-range" min="0" max="20" step="1" value="0" id="spoken">
-                                        <label for="communication" class="form-label">COMMUNICATION</label>
-                                        <input type="range" formControlName='communication' [ngClass]="{'is-invalid': f['communication'].errors}" class="form-range" min="0" max="20" step="1" value="0" id="communication">
-                                        <label for="aptitude" class="form-label">APTITUDE</label>
-                                        <input type="range" formControlName='aptitude' [ngClass]="{'is-invalid': f['aptitude'].errors}" class="form-range" min="0" max="20" step="1" value="0" id="aptitude">
-                                                                           
+                                    <label for="phone" class="col-form-label">Non Technical Skill Expertise Level <span
+                                            class="fw-light">(between 0 and 20)</span>:</label>
+                                    <div class="card mb-4 shadow ">
+                                        <!-- <div class="card-header">Non Technical Skill Expertise Level</div> -->
+                                        <div class="card-body text-center">
+                                            <!-- <h5 class="card-title">Non Technical Skill Expertise Level</h5>                                      -->
+                                            <label for="spoken" class="form-label">SPOKEN</label>
+                                            <input type="range" formControlName='spoken'
+                                                [ngClass]="{'is-invalid': f['spoken'].errors}" class="form-range"
+                                                min="0" max="20" step="1" value="0" id="spoken">
+                                            <label for="communication" class="form-label">COMMUNICATION</label>
+                                            <input type="range" formControlName='communication'
+                                                [ngClass]="{'is-invalid': f['communication'].errors}" class="form-range"
+                                                min="0" max="20" step="1" value="0" id="communication">
+                                            <label for="aptitude" class="form-label">APTITUDE</label>
+                                            <input type="range" formControlName='aptitude'
+                                                [ngClass]="{'is-invalid': f['aptitude'].errors}" class="form-range"
+                                                min="0" max="20" step="1" value="0" id="aptitude">
+
+                                        </div>
                                     </div>
                                 </div>
-                              </div>
-                              <div class="col-md-12 ">
-                                  <button type="submit" *ngIf="!f['id'].value" class="btn btn-primary" [disabled]="this.userForm.invalid">Submit</button>
-                                  <button type="button" *ngIf="f['id'].value" class="btn btn-primary" [disabled]="this.userForm.invalid" (click)="onUpdate()">Update</button>
-                                  <button type="reset" class="btn btn-outline-primary ms-2">Reset</button>
+                                <div class="col-md-12 ">
+                                    <button type="submit" *ngIf="!f['id'].value" class="btn btn-primary"
+                                        [disabled]="this.userForm.invalid">Submit</button>
+                                    <button type="button" *ngIf="f['id'].value" class="btn btn-primary"
+                                        [disabled]="this.userForm.invalid" (click)="onUpdate()">Update</button>
+                                    <button type="reset" class="btn btn-outline-primary ms-2">Reset</button>
                                 </div>
                             </fieldset>
                         </form>
