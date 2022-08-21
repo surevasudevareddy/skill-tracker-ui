@@ -25,10 +25,9 @@ export class AdminHomeComponent implements OnInit {
 
   onSubmit() {
 
-    //this.userProfiles=[];
-    this.trackerApi.getUserProfiles(this.searchForm.value).subscribe({
-      next: (v) => {
-        this.userProfiles = v;
+    this.trackerApi.getUserProfiles('name', this.f['name'].value).subscribe({
+      next: (response) => {
+        Object.assign(this.userProfiles, response['profileList'])
         console.log("response")
         console.log(this.userProfiles)
         if (this.userProfiles.length == 0) {

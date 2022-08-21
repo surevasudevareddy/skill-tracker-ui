@@ -108,8 +108,8 @@ export class UserHomeComponent implements OnInit {
     userProfile.associateId = this.f['associateId'].value
     userProfile.email = this.f['email'].value
     userProfile.mobile = this.f['mobile'].value
-    userProfile.createTs = new Date();
-    userProfile.updateTs = new Date();
+    //userProfile.createTs = new Date();
+    //userProfile.updateTs = new Date();
     userProfile.profileSkillList.push(new ProfileSkill('htmlCssJs', this.f['htmlCssJs'].value, 'Technical'));
     userProfile.profileSkillList.push(new ProfileSkill('angular', this.f['angular'].value, 'Technical'));
     userProfile.profileSkillList.push(new ProfileSkill('react', this.f['react'].value, 'Technical'));
@@ -144,10 +144,11 @@ export class UserHomeComponent implements OnInit {
 
   //update the skills which are got modified
   onUpdate() {
-    this.userProfile.updateTs = new Date();//update data for user and take the modified skills into array to send to service
-    console.log("Uddatre Profile::"+ this.userProfile);
-    console.log("Uddate Profile Name::"+ this.userProfile.name);
-    
+    //this.userProfile.updateTs = new Date();//update data for user and take the modified skills into array to send to service
+    console.log("profile creation date: " + this.userProfile);
+    this.userProfile.name = this.f['name'].value
+    this.userProfile.email = this.f['email'].value;
+    this.userProfile.mobile = this.f['mobile'].value
     this.userProfile.profileSkillList = this.userProfile.profileSkillList.filter(ProfileSkill => {
       if (this.f[ProfileSkill.skillName].dirty) {
         ProfileSkill.expertiseLevel = Number(this.f[ProfileSkill.skillName].value);
@@ -164,6 +165,7 @@ export class UserHomeComponent implements OnInit {
         console.log(e)
       }
     });
+    this.disableUser = 'disabled';
     this.disableSkill = 'disabled';//disabled the skill section, so that it will now allow for immidiate update
   }
 

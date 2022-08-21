@@ -2,7 +2,7 @@ const API = '/api';
 const AUTH = API + '/auth';
 const SKILL_TRACKER = API + '/skill-tracker';
 const ENGINEER = '/engineer';
-const ADMIN = '/admin';
+const ADMIN = '/admin/';
 
 export const AUTH_URLS = {
   LOGIN: `${AUTH}/login`,

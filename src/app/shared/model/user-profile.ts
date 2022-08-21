@@ -4,8 +4,8 @@ export class UserProfile {
     associateId!:string;
     email!:string;
     mobile!:number;
-    createTs!:Date;
-    updateTs!:Date;
+    //createTs!:Date;
+    //updateTs!:Date;
     profileSkillList: ProfileSkill[] =[]
 }
 export class ProfileSkill{
