@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
+  //API_URL:'http://ec2-52-14-200-107.us-east-2.compute.amazonaws.com:9080'
   API_URL:'http://localhost:9080',
-  //AUTH_URL:'http://localhost:9085/auth'
 };
 
 /*

@@ -18,20 +18,21 @@ export class AdminHomeComponent implements OnInit {
   ngOnInit(): void {
     this.searchForm = this.formBuilder.group({
       name: [''],
-      associateId: ['', Validators.pattern('^CTS+[a-zA-Z]*')],
+      associateId: ['', Validators.pattern('^CTS+[0-9]*')],
       skillName: ['']
     })
   }
 
   onSubmit() {
-
     this.trackerApi.getUserProfiles(this.searchForm.value).subscribe({
       next: (response) => {
-        Object.assign(this.userProfiles, response['profileList'])
-        console.log("response")
+        this.userProfiles = response['profileList'];
+        //Object.assign(this.userProfiles, response['profileList'])
         console.log(this.userProfiles)
-        if (this.userProfiles.length == 0) {
+        if (this.userProfiles.length === 0) {
           this.result = true;
+        } else {
+          this.result = false;
         }
       },
       error: (err) => console.log(err)

@@ -32,6 +32,7 @@ export class TrackerGatewayApiService {
   }
 
   public getUserProfiles(criteria: any): Observable<any> {
+    console.log("Criteria::" + criteria.name + " " + criteria.associateId + " " + criteria.skillName)
     return this.httpClient.post(SKILL_TRACKER_URLS.GET_PROFILES, criteria);
   }
 

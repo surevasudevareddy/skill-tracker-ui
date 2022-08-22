@@ -122,7 +122,7 @@ export class UserHomeComponent implements OnInit {
     userProfile.profileSkillList.push(new ProfileSkill('aws', this.f['aws'].value, 'Technical'));
     userProfile.profileSkillList.push(new ProfileSkill('spoken', this.f['spoken'].value, 'Non-Technical'));
     userProfile.profileSkillList.push(new ProfileSkill('communication', this.f['communication'].value, 'Non-Technical'));
-    userProfile.profileSkillList.push(new ProfileSkill('aptitude', this.f['aptitude'].value, 'Non-Technical '));
+    userProfile.profileSkillList.push(new ProfileSkill('aptitude', this.f['aptitude'].value, 'Non-Technical'));
     this.trackerAPI.addUserProfile(userProfile).subscribe({
       next: (response) => {
         console.log(response);
